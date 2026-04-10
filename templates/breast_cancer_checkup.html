@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Checkup - AI Disease Detector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #d81b60;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+        }
+
+        nav .links a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav .links a:hover {
+            text-decoration: underline;
+        }
+
+        nav .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        nav .profile img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        nav .profile:hover::after {
+            content: "Your Profile";
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #fff;
+            color: #333;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        header {
+            background: linear-gradient(to right, #ec407a, #d81b60);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        section {
+            padding: 30px 20px;
+        }
+
+        .form-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #d81b60;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #fafafa;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #d81b60;
+            outline: none;
+            background-color: #fff;
+        }
+
+        button {
+            background: linear-gradient(to right, #ec407a, #d81b60);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #d81b60, #ad1457);
+        }
+
+        footer {
+            text-align: center;
+            background-color: #d81b60;
+            color: white;
+            padding: 12px;
+            margin-top: 40px;
+        }
+
+        ul {
+            margin-top: 20px;
+            padding-left: 20px;
+            color: #d32f2f;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            nav .links {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI Disease Detector - Breast Cancer Checkup</h1>
+    <p>Enter your medical details below to assess your risk.</p>
+</header>
+
+<section>
+    <div class="form-container">
+        <h1>Breast Cancer Checkup</h1>
+        <form method="POST" action="{% url 'breast_cancer_checkup' %}">
+            {% csrf_token %}
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <br>
+          
+            <label for="menopause">Menopause:</label>
+            <select id="menopause" name="menopause" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <br>
+          
+            <label for="tumor_size">Tumor Size (cm):</label>
+            <select id="tumor_size" name="tumor_size" required>
+              <option value="#">Select Size</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="14">14</option>
+            </select>
+            <br>
+          
+            <label for="inv_nodes">Involved Nodes:</label>
+            <select id="inv_nodes" name="inv_nodes" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <br>
+          
+            <label for="breast">Breast Side:</label>
+            <select id="breast" name="breast" required>
+              <option value="0">Left</option>
+              <option value="1">Right</option>
+            </select>
+            <br>
+          
+            <label for="metastasis">Metastasis:</label>
+            <select id="metastasis" name="metastasis" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <br>
+          
+            <label for="breast_quadrant">Breast Quadrant:</label>
+            <select id="breast_quadrant" name="breast_quadrant" required>
+              <option value="0">Lower inner</option>
+              <option value="1">Lower outer</option>
+              <option value="2">Upper inner</option>
+              <option value="3">Upper outer</option>
+            </select>
+            <br>
+          
+            <label for="history">Family History of Breast Cancer:</label>
+            <select id="history" name="history" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <br>
+          
+            <button type="submit">Submit</button>
+          </form>
+          
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 AI Disease Detector | Breast Cancer Checkup</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Disease Detector - An AI-driven web application for detecting various diseases like cancer.">
+    <title>AI Disease Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-image: url("{% static 'prodoc.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%; 
+            background-color: #007BFF;
+            border: 3px solid black;
+            color: black;
+            padding: 200px ;
+            text-align: center;
+            position: relative;
+        }
+        header h1 {
+            font-size: 42px; 
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 20px;
+            margin-top: 0;
+        }
+        .profile-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            background-color: white;
+            color: #007BFF;
+            border-radius: 50%;
+            padding: 8px 12px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .profile-icon:hover {
+            background-color: #e6e6e6;
+        }
+        section {
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .content-container {
+            background-color: white;
+            max-width: 900px;
+            border: 3px solid black;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+        }
+        .links-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .links-container a {
+            color: #007BFF;
+            font-size: 18px;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .links-container a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 10px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+       .btn.blue {
+            background-color: #007BFF;
+            color: white;
+        }
+       .btn.green {
+            background-color: #28a745;
+            color: white;
+        }
+       .btn.red {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn.pink {
+            background-color: deeppink;
+            color: white;
+        }
+
+        .btn:hover {
+           opacity: 0.9;
+        } 
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI Disease Predictor</h1>
+    <p>Revolutionizing Medical Diagnosis with AI Technology</p>
+    
+    {% if request.session.user_id %}
+    <div style="position: absolute; top: 20px; left: 20px;">
+        <a href="{% url 'profile' %}" title="View Profile" style="text-decoration: none;">
+            <img src="{% static 'profile_icon.png' %}" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%;">
+        </a>
+    </div>
+    {% endif %}
+
+</header>
+
+<section>
+    <div class="content-container">
+        <h2>About the Website</h2>
+        <p>Welcome to the <strong>AI Disease Detector</strong>, an innovative web application designed to detect various diseases, including cancer, with the help of advanced artificial intelligence. Our goal is to bring cutting-edge technology to the medical field, enabling accurate disease detection for a wide range of conditions.</p>
+
+        <h2>How It Works</h2>
+        <p>The AI model used on our platform is trained with a vast array of data sets, specifically focused on detecting different types and stages of cancer. By using these data sets, the AI model can analyze medical data with remarkable precision, providing users with reliable disease detection capabilities.</p>
+
+        <h2>Transforming the Medical Landscape</h2>
+        <p>Our web application aims to revolutionize the medical landscape by providing a free, easy-to-use platform that helps users identify potential health issues at an early stage. The accuracy of the AI model is continuously improving, ensuring that users receive the most up-to-date and accurate information available.</p>
+
+        <h2>Accessibility and Public Awareness</h2>
+        <p>One of the key features of our platform is that it is completely free. This allows us to reach a broader audience and raise awareness about the importance of early disease detection. We believe that providing accessible tools for disease detection can make a significant impact on public health globally.</p>
+
+        <h2>Easy to Use</h2>
+        <p>The AI Disease Detector is designed with simplicity in mind. Its user-friendly interface makes it accessible to people of all ages and technical backgrounds. Whether you're a healthcare professional or an everyday user, our platform is designed to guide you through the process of disease detection effortlessly.</p>
+    </div>
+
+    <div class="links-container">
+        {% if request.session.user_id %}
+            <a href="{% url 'lung_cancer_checkup' %}" class="btn green">🫁 Lung Cancer Checkup</a>
+            <a href="{% url 'breast_cancer_checkup' %}" class="btn pink">🩺 Breast Cancer Checkup</a>
+            <a href="{% url 'logout' %}" class="btn red">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn blue">Log In</a>
+            <a href="{% url 'lung_cancer_checkup' %}" class="btn green">🫁 Lung Cancer Checkup</a>
+            <a href="{% url 'breast_cancer_checkup' %}" class="btn pink">🩺 Breast Cancer Checkup</a>
+        {% endif %}
+    </div>
+    
+</section>
+
+<footer>
+    <p>&copy; 2025 AI Disease Detector | All rights reserved</p>
+</footer>
+
+</body>
+</html>

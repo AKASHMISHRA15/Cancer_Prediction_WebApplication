@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Checkup Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+
+        .feature-box {
+            background-color: #f0f2f5;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+
+        .section-title {
+            margin-top: 25px;
+            font-weight: bold;
+            text-decoration: underline;
+            color: #34495e;
+        }
+
+        .risk {
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .risk.high {
+            background-color: #ffdddd;
+            color: #c0392b;
+            border: 1px solid #e74c3c;
+        }
+
+        .risk.low {
+            background-color: #ddffdd;
+            color: #27ae60;
+            border: 1px solid #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🩺 Health Checkup Results</h1>
+
+        <div class="feature-box"><strong>Age:</strong> {{ form_data.age }}</div>
+        <div class="feature-box"><strong>Gender:</strong> {{ form_data.gender }}</div>
+
+        <p class="section-title">Symptoms:</p>
+        <div class="feature-box"><strong>Persistent Cough:</strong> {{ form_data.coughing }}</div>
+        <div class="feature-box"><strong>Shortness of Breath:</strong> {{ form_data.shortness_of_breath }}</div>
+        <div class="feature-box"><strong>Swallowing Difficulty:</strong> {{ form_data.swallowing_difficulty }}</div>
+        <div class="feature-box"><strong>Chest Pain:</strong> {{ form_data.chest_pain }}</div>
+        <div class="feature-box"><strong>Wheezing:</strong> {{ form_data.wheezing }}</div>
+
+        <p class="section-title">Lifestyle Factors:</p>
+        <div class="feature-box"><strong>Smoking:</strong> {{ form_data.smoking }}</div>
+        <div class="feature-box"><strong>Alcohol Consumption:</strong> {{ form_data.alcohol }}</div>
+        <div class="feature-box"><strong>Yellow Fingers:</strong> {{ form_data.yellow_fingers }}</div>
+        <div class="feature-box"><strong>Anxiety:</strong> {{ form_data.anxiety }}</div>
+        <div class="feature-box"><strong>Peer Pressure:</strong> {{ form_data.peer_pressure }}</div>
+        <div class="feature-box"><strong>Chronic Disease:</strong> {{ form_data.chronic_disease }}</div>
+        <div class="feature-box"><strong>Fatigue:</strong> {{ form_data.fatigue }}</div>
+        <div class="feature-box"><strong>Allergy:</strong> {{ form_data.allergy }}</div>
+
+        <div class="risk {% if risk_level == 'High' %}high{% else %}low{% endif %}">
+            Risk Assessment: {{ risk_level }} Risk of Lung Cancer
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'info' %}" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; margin-right: 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px;">
+                🏠 Go Home
+            </button>
+        </a>
+        <a href="{% url 'lung_cancer_checkup' %}" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; background-color: #28a745; color: white; border: none; border-radius: 5px;">
+                Retake  Checkup
+            </button>
+        </a>
+    </div>
+    <footer>
+        <p>&copy; 2025 AI Disease Detector | All rights reserved</p>
+    </footer>
+</body>
+</html>

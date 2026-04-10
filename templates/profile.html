@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 95%;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .info p {
+            margin: 8px 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .no-data {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>👤 Profile</h1>
+    <div class="info">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+
+    <h2>📋 Lung Cancer Checkup History</h2>
+    {% if health_checkups %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Risk Level</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Smoking</th>
+                    <th>Yellow Fingers</th>
+                    <th>Anxiety</th>
+                    <th>Peer Pressure</th>
+                    <th>Chronic Disease</th>
+                    <th>Fatigue</th>
+                    <th>Allergy</th>
+                    <th>Wheezing</th>
+                    <th>Alcohol</th>
+                    <th>Coughing</th>
+                    <th>Shortness of Breath</th>
+                    <th>Swallowing Difficulty</th>
+                    <th>Chest Pain</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for checkup in health_checkups %}
+                <tr>
+                    <td>{{ checkup.submitted_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ checkup.risk_level }}</td>
+                    <td>{{ checkup.age }}</td>
+                    <td>{{ checkup.gender|yesno:"Male,Female" }}</td>
+                    <td>{{ checkup.smoking|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.yellow_fingers|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.anxiety|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.peer_pressure|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.chronic_disease|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.fatigue|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.allergy|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.wheezing|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.alcohol_consumption|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.coughing|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.shortness_of_breath|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.swallowing_difficulty|yesno:"Yes,No" }}</td>
+                    <td>{{ checkup.chest_pain|yesno:"Yes,No" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="no-data">No lung cancer checkup history yet.</p>
+    {% endif %}
+
+    <h2>🩺 Breast Cancer Checkup History</h2>
+    {% if breast_checkups %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Result</th>
+                    <th>Age</th>
+                    <th>Menopause</th>
+                    <th>Tumor Size (cm)</th>
+                    <th>Inv-Nodes</th>
+                    <th>Breast</th>
+                    <th>Metastasis</th>
+                    <th>Breast Quadrant</th>
+                    <th>History</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for checkup in breast_checkups %}
+                <tr>
+                    <td>{{ checkup.date_checked|date:"Y-m-d H:i" }}</td>
+                    <td>{{ checkup.result }}</td>
+                    <td>{{ checkup.age }}</td>
+                    <td>{{ checkup.menopause }}</td>
+                    <td>{{ checkup.tumor_size }}</td>
+                    <td>{{ checkup.inv_nodes }}</td>
+                    <td>{{ checkup.breast }}</td>
+                    <td>{{ checkup.metastasis }}</td>
+                    <td>{{ checkup.breast_quadrant }}</td>
+                    <td>{{ checkup.history }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="no-data">No breast cancer checkup history yet.</p>
+    {% endif %}
+</div>
+</body>
+</html>

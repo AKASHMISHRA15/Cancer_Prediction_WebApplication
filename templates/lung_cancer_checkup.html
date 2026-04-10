@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Health Checkup Form - AI Disease Detector">
+    <title>Health Checkup - AI Disease Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .questionnaire-form {
+            margin-top: 20px;
+        }
+
+        .questionnaire-form label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .questionnaire-form input[type="text"],
+        .questionnaire-form input[type="number"],
+        .questionnaire-form input[type="radio"],
+        .questionnaire-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .questionnaire-form button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .questionnaire-form button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI Disease Detector - Health Checkup</h1>
+    <p>Answer a few questions to assess your health and risk of diseases.</p>
+</header>
+
+<section>
+    <div class="form-container">
+        <h1>Health Checkup Questionnaire</h1>
+        <form id="health_checkup_form" class="questionnaire-form" action="{% url 'lung_cancer_checkup' %}"method="POST">
+            {% csrf_token %}
+            <!-- Age Field -->
+            <label for="age">What is your age?</label>
+            <input type="number" id="age" name="age" required placeholder="Enter your age">
+
+            <!-- Gender Field -->
+            <label for="gender">What is your gender?</label>
+            <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <!-- Smoking Field -->
+            <label for="smoking">Do you smoke?</label>
+            <select id="smoking" name="smoking">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Yellow Fingers Field -->
+            <label for="yellow_fingers">Do you have yellow fingers?</label>
+            <select id="yellow_fingers" name="yellow_fingers">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Anxiety Field -->
+            <label for="anxiety">Do you feel anxious often?</label>
+            <select id="anxiety" name="anxiety">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Peer Pressure Field -->
+            <label for="peer_pressure">Do you experience peer pressure?</label>
+            <select id="peer_pressure" name="peer_pressure">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Chronic Disease Field -->
+            <label for="chronic_disease">Do you have any chronic diseases?</label>
+            <select id="chronic_disease" name="chronic_disease">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Fatigue Field -->
+            <label for="fatigue">Do you experience frequent fatigue?</label>
+            <select id="fatigue" name="fatigue">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Allergy Field -->
+            <label for="allergy">Do you have allergies?</label>
+            <select id="allergy" name="allergy">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Wheezing Field -->
+            <label for="wheezing">Do you experience wheezing?</label>
+            <select id="wheezing" name="wheezing">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Coughing Field -->
+            <label for="coughing">Do you have persistent coughing?</label>
+            <select id="coughing" name="coughing">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Shortness of Breath Field -->
+            <label for="shortness_of_breath">Do you experience shortness of breath?</label>
+            <select id="shortness_of_breath" name="shortness_of_breath">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Swallowing Difficulty Field -->
+            <label for="swallowing_difficulty">Do you have difficulty swallowing?</label>
+            <select id="swallowing_difficulty" name="swallowing_difficulty">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Chest Pain Field -->
+            <label for="chest_pain">Do you experience chest pain?</label>
+            <select id="chest_pain" name="chest_pain">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <!-- Alcohol Consumption Field -->
+            <label for="alcohol">Do you consume alcohol?</label>
+            <select id="alcohol" name="alcohol">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+
+            <button type="submit">Submit and Check My Health</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 AI Disease Detector | All rights reserved</p>
+</footer>
+
+</body>
+</html>
